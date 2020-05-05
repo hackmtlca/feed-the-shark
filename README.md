@@ -1,6 +1,10 @@
-# Flask SQLite Docker
+# Feed The Shark
 
-Template for a Flask and SQLite stack. **This is made for competition purposes only.** We acknowledge that there are security flaws in our method, we don't take responsibility if this is taken in production.
+This problem is part of the `Intro to Hacking Workshop`. View the [Bug Bounty Guide](https://github.com/hackmtlca/bug-bounty-guide) for more information about the score system.
+
+## Context
+
+This is a basic [Wireshark](https://www.wireshark.org/) analysis problem. We provide you a website that a user logged into. This traffic can be found in `user.pcapng`. Your goal is to find `three hidden flags` on the website. The `user.pcapng` file will give you all the information you need for two of the keys. The last one requires abit of forensics.
 
 ## Running the App
 
@@ -19,30 +23,3 @@ The app can be closed using CTRL+C. The app can be completely closed with the fo
 ```
 docker-compose down
 ```
-
-## API
-
-We made a simple system that lets you expand the API as you wish.
-
-### Users
-
-We implemented a simple user system to get basic authentication:
-
-```
-(session) -> /api/users/me -> (user_id, username): Gets the info for the current user.
-(username, password) -> /api/users/register -> (user_id, username, password): Registers the user in a temporary database.
-(username, password) -> /api/users/login -> (session): Sign in user and returns an HTTP-Only cookie with session.
-/api/users/logout: Revokes session cookie from user.
-```
-
-### Tools
-
-We implemented functions that could be useful for competitors.
-
-```
-/api/tools/reset: Replaces the database under tmp with the one in data. Revoke user token aswell.
-```
-
-## Static Content
-
-All static content can be placed under the public folder. This folder will be exposed under `http://hostname/static/...`.

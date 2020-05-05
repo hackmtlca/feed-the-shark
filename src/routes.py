@@ -7,13 +7,14 @@ routes = Blueprint('routes', __name__)
 def home():
     # Simple example of using logged_in feature to change layout.
     if g.logged_in:
-        return render_template('app.html')
+        message = 'I am still hungry'
+
+        if g.user['username'] == 'baby_shark':
+            message = 'Thank you for feeding'
+
+        return render_template('app.html', message=message)
     else:
         return render_template('home.html')
-
-@routes.route('/tools')
-def tools():
-    return render_template('tools.html')
 
 @routes.route('/public/<path:path>')
 def public(path):
@@ -37,3 +38,14 @@ def login():
 def logout():
     # Logout using the api (simple redirect).
     return redirect('/api/users/logout')
+
+@routes.route('/i/am/so/hungry/feed/me')
+def flag():
+    return render_template('flag.html')
+
+@routes.route('/admin')
+def admin():
+    if g.user['username'] == 'baby_shark':
+        return render_template('app.html', message='MTL{TH15_50NG_5UCK5}')
+
+    return redirect('/')

@@ -1,8 +1,5 @@
 from flask import Flask, g, request
 from flask_sqlalchemy import SQLAlchemy
-import src.api.users
-import src.api.tools
-import src.routes
 import os
 import shutil
 import glob
@@ -40,10 +37,12 @@ def inject_user_state():
         g.logged_in = False
 
 if __name__ == '__main__':
+    from src.api.users import users
+    from src.routes import routes
+
     # Registers the API blueprints.
-    app.register_blueprint(src.api.users.users)
-    app.register_blueprint(src.api.tools.tools)
-    app.register_blueprint(src.routes.routes)
+    app.register_blueprint(users)
+    app.register_blueprint(routes)
 
     # Remove debug mode once in production.
     app.run(debug=True, host='0.0.0.0', port=80)

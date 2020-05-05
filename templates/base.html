@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>{% block title %}{% endblock %} - Hack MTL</title>
+    <title>{% block title %}{% endblock %} - Feed The Shark</title>
     <link rel="shortcut icon" href="/public/images/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -17,7 +17,7 @@
     <style>
         body {
             margin: 0px;
-            background-color: #343a40;
+            background-color: #007bff;
             color: white;
         }
 
@@ -29,8 +29,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Hack MTL</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">Feed The Shark</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,12 +38,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item {% block homeActive %}{% endblock %}">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item {% block toolsActive %}{% endblock %}">
-                    <a class="nav-link" href="/tools">Tools</a>
-                </li>
+                {% if g.user['username'] == 'baby_shark' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                {% endif %}
             </ul>
             {% if g.logged_in %}
             <form action="/logout" class="form-inline my-2 my-lg-0">
